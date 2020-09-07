@@ -1,21 +1,23 @@
 <div class="container mt-3">
-<h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
-<h2>
-  <%= pluralize @restaurant.reviews.size, "review" %>
-</h2>
+  <h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
+  <h2><%= pluralize @restaurant.reviews.size, "review" %></h2>
 
-<div id="reviews">
-  <% if @restaurant.reviews.blank? %>
-    Be the first to leave a review for <%= @restaurant.name %>
-  <% else %>
-    <% @restaurant.reviews.each do |review| %>
-      <p id="review-<%= review.id %>"><%= review.content %></p>
+  <div id="reviews">
+    <% if @restaurant.reviews.blank? %>
+      Be the first to leave a review for <%= @restaurant.name %>
+    <% else %>
+      <% @restaurant.reviews.each do |review| %>
+        <p id="review-<%= review.id %>"><%= review.content %></p>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<%= simple_form_for([ @restaurant, @review ], remote: true) do |f| %>
-  <%= f.input :content, as: :text %>
-  <%= f.button :submit %>
-<% end %>
+  <%= simple_form_for([ @restaurant, @review ], remote: true) do |f| %>
+    <%= f.input :content, as: :text %>
+    <%= f.button :submit, class: 'btn btn-secondary' %>
+  <% end %>
+    <br>
+    <hr>
+    
+  <%= link_to 'Back to Restaurants', restaurants_path, class: 'btn btn-secondary'%>
 </div>
